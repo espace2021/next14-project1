@@ -1,23 +1,22 @@
 'use client'
 
 import { useFormState, useFormStatus } from 'react-dom'
-import { addCategory} from '@/lib/actionsCategorie'
+import { createProduct } from '@/lib/actions'
 import { useEffect, useRef } from 'react'
 import toast from 'react-hot-toast'
 
 export default function CreateForm() {
-  const [state, formAction] = useFormState(addCategory, {
+  const [state, formAction] = useFormState(createProduct, {
     message: '',
   })
-
   const { pending } = useFormStatus()
-
   const ref = useRef()
-
   useEffect(() => {
-   if (state.message){
-      (document.getElementById('my_modal_3')).close()
+    if (state.message.indexOf('Created product') === 0) {
+      ;(document.getElementById('my_modal_3')).close()
       ref.current?.reset()
+      toast(state.message)
+    } else if (state.message) {
       toast(state.message)
     }
   }, [state.message])
@@ -35,7 +34,6 @@ export default function CreateForm() {
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
           <h2 className="tex-2xl font-bold pm-4">Create Category</h2>
-          
           <form ref={ref} action={formAction}>
             <div className="form-control w-full max-w-xs py-4">
               <label htmlFor="nomcategorie">Name</label>
