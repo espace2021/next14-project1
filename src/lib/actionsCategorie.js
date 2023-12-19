@@ -19,7 +19,6 @@ export async function addCategory(prevState, formData) {
             body: JSON.stringify(categorie),
         });
         const result = await response.json();
-        console.log(result)
         revalidatePath('/categories')
        if(result.nomcategorie) return { message: `Created category ${result.nomcategorie}` }
        else  return { message: 'Failed to create category' }
@@ -27,3 +26,20 @@ export async function addCategory(prevState, formData) {
   return { message: 'Failed to create category' }
 }
 }
+
+export async function deleteCateg(formData) {
+    const _id= formData.get('_id')
+    const nomcategorie= formData.get('nomcategorie')
+      
+    try {
+        const response = await fetch(`http://localhost:3001/api/categories/${_id}`,{
+            method: 'DELETE'
+        });
+        const result = await response.json();
+        console.log(result)
+        revalidatePath('/categories')
+      return { message: `Deleted category ${nomcategorie}` }
+    } catch (e) {
+      return { message: 'Failed to delete category' }
+    }
+  }

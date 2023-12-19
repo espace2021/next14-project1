@@ -1,6 +1,6 @@
 import ListCategories from "@/components/categories/listCategories"
 import { Toaster } from 'react-hot-toast'
-import CreateForm from './createCateg'
+import CreateForm from '@/components/categories/createCateg'
 
 async function getData() {
     const res = await fetch('http://localhost:3001/api/categories')

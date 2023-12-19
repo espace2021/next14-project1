@@ -2,6 +2,8 @@
 import React from 'react'
 import { MaterialReactTable} from 'material-react-table';
 
+import DeleteForm from './deleteCateg'
+
 const ListCategories = ({categories}) => {
 
     const columns = React.useMemo(
@@ -29,19 +31,17 @@ const ListCategories = ({categories}) => {
             header: 'Actions',
             size: 100,
             Cell: ({ cell, row }) => (
-                <div >
+                <div>
                     <button className="btn btn-ghost text-success"
                         onClick={() => {}}
                         size="md"
                     >
                        Edit
                     </button>
-                    <button className="btn btn-ghost text-warning"
-                        onClick={() => {}}
-                        size="md"
-                    >
-                        Delete
-                    </button>
+                    <DeleteForm
+                    _id={cell.row.original._id}
+                    nomcategorie={cell.row.original.nomcategorie}
+                  />
                 </div>
             ),
         },

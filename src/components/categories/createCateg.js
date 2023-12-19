@@ -6,6 +6,9 @@ import { useEffect, useRef } from 'react'
 import toast from 'react-hot-toast'
 
 export default function CreateForm() {
+
+  console.log("create categ component")
+
   const [state, formAction] = useFormState(addCategory, {
     message: '',
   })
@@ -14,7 +17,7 @@ export default function CreateForm() {
 
   const ref = useRef()
 
-  useEffect(() => {
+  useEffect(() => { 
    if (state.message){
       (document.getElementById('my_modal_3')).close()
       ref.current?.reset()
